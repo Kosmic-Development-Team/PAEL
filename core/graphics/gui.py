@@ -12,7 +12,9 @@ class Gui:
         self.arrownav = True
         self.components = components  # list of components
         for i in range(len(self.components)):
-            self.components[i].index = i
+            c = self.components[i]
+            c.index = i
+            c.container = self
         self.map = compmap  # hashmap <int, list <int>>
         self.fontcode = fontcode
         self.current = -1
@@ -52,7 +54,7 @@ class Gui:
             self.current = comp.index
 
     def keyin(self, key):
-        if 273 <= key <= 276 and self.map and self.current is not -1:
+        if self.arrownav and 273 <= key <= 276 and self.map and self.current is not -1:
             cc = self.current
             self.current = self.map[cc][key - 273]
             if cc is not self.current:

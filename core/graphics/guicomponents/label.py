@@ -1,26 +1,21 @@
-import core.guimanager
 from core.graphics.guicomponents import component
-from core import screen
+import core
 from core.graphics import font
-from core.graphics.guicomponents.component import defaultrun
+from core import screen
 
 
-class Button(component.Component):
-    def __init__(self, pos, text, fontcode, backcols, forecols, inrun=defaultrun):
+class Label(component.Component):
+    def __init__(self, pos, text, fontcode, backcols, forecols):
         super(self.__class__, self).__init__(pos, (len(backcols[0]), len(backcols)))
         self.text = text[:]
         self.back = backcols
         self.fore = forecols
         self.indents = core.guimanager.indexfromtext(self.text, self.dim)
         self.fontcode = fontcode
-        self.inputrun = inrun  # func-2 whenever key input
 
     def changetext(self, ntxt):
         self.text = ntxt[:]
         self.indents = core.guimanager.indexfromtext(self.text, self.dim)
-
-    def keyin(self, key):
-        self.inputrun(self, key)
 
     def draw(self):
         f = font.fonts[self.fontcode]
